@@ -12,8 +12,7 @@ class CoursesNavigation extends Component{
                 <Link to="/Courses/1234/Modules">Modules</Link><br/>
                 <Link to="/Courses/1234/Piazza">Piazza</Link><br/>
                 <Link to="/Courses/1234/Zoom">Zoom</Link><br/>
-                <Link to="/Courses/1234/Assignments">
-                    Assignments</Link><br/>
+                <Link to="/Courses/1234/Assignments">Assignments</Link><br/>
                 <Link to="/Courses/1234/Quizzes">Quizzes</Link><br/>
                 <Link to="/Courses/1234/Grades">Grades</Link><br/>
                 <Link to="/Courses/1234/People">People</Link><br/>

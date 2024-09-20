@@ -13,12 +13,23 @@ export default function Assignments() {
         <ul id="wd-assignment-list">
           <li className="wd-assignment-list-item">
             <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/123">
+              href="/Courses/1234/Assignments/:aid">
               A1 - ENV + HTML
             </a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam?</p>
           </li>
           <li className="wd-assignment-list-item">
+            <a href="/Courses/1234/Assignments/:aid">
+              A2 - CSS And Bootstrap
+            </a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur qui nulla, nobis adipisci error accusantium!</p>
             {/* Complete On Your Own */}
+          </li>
+          <li>
+            <a href="/Courses/1234/Assignments/:aid">
+              A3 - Javscript And React
+            </a>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit fugit dignissimos deserunt illo. Culpa qui rem cumque molestiae! Earum, doloremque!</p>
           </li>
         </ul>
       </div>
