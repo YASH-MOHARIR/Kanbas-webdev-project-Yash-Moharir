@@ -15,7 +15,7 @@ class MainNavigation extends  Component {
             <Link to="/Courses/01" id="wd-course-link">Courses</Link><br/>
             <Link to="/Calendar" id="wd-calendar-link">Calendar</Link><br/>
             <Link to="/Inbox" id="wd-inbox-link">Inbox</Link><br/>
-            <Link to="/Labs" id="wd-labs-link">Labs</Link><br/>
+            <a href="https://main--a1-landing-page.netlify.app/">Labs - Landing Page</a> 
           </div>
         );
     }
