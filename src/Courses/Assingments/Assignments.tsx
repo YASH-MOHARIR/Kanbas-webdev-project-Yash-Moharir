@@ -52,13 +52,9 @@ export default function Assignments() {
           <BsGripVertical className="grip-icon" />
 
           <div className="card-body d-inline ml-5">
-            <a className="wd-assignment-link " href="Assignments/editor">
+            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/1">
               A1 - ENV + HTML
-            </a>
-            
-            <Link to="/Courses/1234/Assignments/1" className="list-group-item active border border-0">
-              A1 - ENV + HTML
-          </Link>
+            </Link>
             <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
@@ -72,9 +68,9 @@ export default function Assignments() {
           <BsGripVertical className="grip-icon" />
 
           <div className="card-body d-inline ml-5">
-            <a className="wd-assignment-link " href=" Assignments/editor">
+            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/2">
               A2 - CSS
-            </a>
+            </Link>
             <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
@@ -88,9 +84,9 @@ export default function Assignments() {
           <BsGripVertical className="grip-icon" />
 
           <div className="card-body d-inline ml-5">
-            <a className="wd-assignment-link " href=" Assignments/editor">
+            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/3">
               A3 -Bootstrap
-            </a>
+            </Link>
             <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
