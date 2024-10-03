@@ -5,6 +5,7 @@ import { BsGripVertical, BsThreeDotsVertical } from "react-icons/bs";
 import { FaCircle } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import GreenCheckmark from "../Modules/GreenCheckmark.tsx";
+import { Link } from "react-router-dom";
 
 export default function Assignments() {
   return (
@@ -54,6 +55,10 @@ export default function Assignments() {
             <a className="wd-assignment-link " href="Assignments/editor">
               A1 - ENV + HTML
             </a>
+            
+            <Link to="/Courses/1234/Assignments/1" className="list-group-item active border border-0">
+              A1 - ENV + HTML
+          </Link>
             <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
