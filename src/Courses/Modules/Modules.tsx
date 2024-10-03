@@ -6,11 +6,8 @@ import { BsGripVertical } from "react-icons/bs";
 export default function Modules() {
   return (
     <div>
-      <ModulesControls /> <br />
-      <br />
-      <br />
-      <br />
-      <ul id="wd-modules" className="list-group rounded-0">
+      <ModulesControls /> 
+      <ul id="wd-modules" className="list-group rounded-0 mt-5 mx-md-4">
         <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-secondary">
   

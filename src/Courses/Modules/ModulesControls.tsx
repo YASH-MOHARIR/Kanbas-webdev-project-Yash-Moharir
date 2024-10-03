@@ -10,11 +10,11 @@ class ModulesControls extends React.Component {
         <button className="btn btn-lg btn-secondary" id=" wd-view-progress">Collapse All</button>
         <button className="btn btn-lg btn-secondary mx-2" id=" wd-collapse-all">View Progress</button> 
 
-        <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
+        <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end ">
           <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
           Module
         </button>
-        <div className="dropdown d-inline me-1 float-end">
+        <div className="dropdown d-inline me-1 float-end  ">
           <button
             id="wd-publish-all-btn"
             className="btn btn-lg btn-secondary dropdown-toggle"
