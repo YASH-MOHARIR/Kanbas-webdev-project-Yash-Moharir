@@ -76,7 +76,7 @@ export default function Assignments() {
             <Link className="wd-assignment-link " to="/Courses/1234/Assignments/2">
               A2 - CSS
             </Link>
-            <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
+            <p>Due Oct 6S at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
           <div className="card-right">
@@ -93,7 +93,7 @@ export default function Assignments() {
             <Link className="wd-assignment-link " to="/Courses/1234/Assignments/3">
               A3 -Bootstrap
             </Link>
-            <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
+            <p>Due Oct 12 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
           </div>
 
           <div className="card-right">

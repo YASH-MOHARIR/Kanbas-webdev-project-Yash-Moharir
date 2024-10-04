@@ -71,6 +71,9 @@ input,
         .grip-icon, .document-editor-icon{
             transform: scale(2);
         }
+        .document-editor-icon{
+            color: green;
+        }
         .card-body{
             margin-left: 20px;
             border-radius: 0px !important;

@@ -67,6 +67,9 @@ input,
 .assignment-cards .assignment-card .grip-icon, .assignment-cards .assignment-card .document-editor-icon {
   transform: scale(2);
 }
+.assignment-cards .assignment-card .document-editor-icon {
+  color: green;
+}
 .assignment-cards .assignment-card .card-body {
   margin-left: 20px;
   border-radius: 0px !important;
