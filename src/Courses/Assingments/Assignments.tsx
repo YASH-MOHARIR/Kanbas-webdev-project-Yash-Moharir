@@ -6,6 +6,7 @@ import { FaCircle } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import GreenCheckmark from "../Modules/GreenCheckmark.tsx";
 import { Link } from "react-router-dom";
+import { MdEditDocument } from "react-icons/md";
 
 export default function Assignments() {
   return (
@@ -50,6 +51,8 @@ export default function Assignments() {
       <ul className="list-group assignment-cards " id="wd-assignment-list">
         <li className="wd-assignment-list-item list-group-item assignment-card p-4">
           <BsGripVertical className="grip-icon" />
+          
+          <MdEditDocument className="document-editor-icon mx-3"/>
 
           <div className="card-body d-inline ml-5">
             <Link className="wd-assignment-link " to="/Courses/1234/Assignments/1">
@@ -66,6 +69,8 @@ export default function Assignments() {
 
         <li className="wd-assignment-list-item list-group-item assignment-card p-4">
           <BsGripVertical className="grip-icon" />
+          
+          <MdEditDocument className="document-editor-icon  mx-3"/>
 
           <div className="card-body d-inline ml-5">
             <Link className="wd-assignment-link " to="/Courses/1234/Assignments/2">
@@ -82,6 +87,7 @@ export default function Assignments() {
 
         <li className="wd-assignment-list-item list-group-item assignment-card p-4">
           <BsGripVertical className="grip-icon" />
+          <MdEditDocument className="document-editor-icon  mx-3"/>
 
           <div className="card-body d-inline ml-5">
             <Link className="wd-assignment-link " to="/Courses/1234/Assignments/3">

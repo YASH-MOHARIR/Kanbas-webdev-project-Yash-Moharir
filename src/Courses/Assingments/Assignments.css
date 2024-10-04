@@ -64,7 +64,7 @@ input,
   align-items: center;
   border-left: 10px green solid;
 }
-.assignment-cards .assignment-card .grip-icon {
+.assignment-cards .assignment-card .grip-icon, .assignment-cards .assignment-card .document-editor-icon {
   transform: scale(2);
 }
 .assignment-cards .assignment-card .card-body {
