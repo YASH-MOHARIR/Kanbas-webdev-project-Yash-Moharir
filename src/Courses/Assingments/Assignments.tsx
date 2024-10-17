@@ -1,13 +1,19 @@
 import React from "react";
-import { LiaPlusSolid, LiaSearchSolid, LiaUserMinusSolid } from "react-icons/lia";
 import "./Assignments.css";
+
+import { LiaPlusSolid, LiaSearchSolid } from "react-icons/lia";
 import { BsGripVertical, BsThreeDotsVertical } from "react-icons/bs";
-import { FaCircle } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { MdEditDocument } from "react-icons/md";
+
 import GreenCheckmark from "../Modules/GreenCheckmark.tsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"; 
+import { users, assignments , courses, enrollments } from "../../Database/database.tsx";
 
 export default function Assignments() {
+  
+  const { cid } = useParams();
+
   return (
     <div id="wd-assignments">
       <div className="search actions">
@@ -48,53 +54,29 @@ export default function Assignments() {
       </div>
 
       <ul className="list-group assignment-cards " id="wd-assignment-list">
-        <li className="wd-assignment-list-item list-group-item assignment-card p-4">
-          <BsGripVertical className="grip-icon" />
 
-          <div className="card-body d-inline ml-5">
-            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/1">
-              A1 - ENV + HTML
-            </Link>
-            <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
-          </div>
+        {assignments
+            .filter((assignment) => enrollments.some((enrollment) => enrollment.course === assignment.course && enrollment.course === cid))
+            .map((assignment: any) => (
+              <li className="wd-assignment-list-item list-group-item assignment-card p-4">
+              <BsGripVertical className="grip-icon" />
+              
+              <MdEditDocument className="document-editor-icon mx-3"/>
+    
+              <div className="card-body d-inline ml-5">
+                <Link className="wd-assignment-link " to={`/Courses/${cid}/Assignments/${assignment._id}`}>
+                  {assignment.title}
+                </Link>
+                <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
+              </div>
+    
+              <div className="card-right">
+                <GreenCheckmark />
+                <BsThreeDotsVertical />
+              </div>
+            </li>
+          ))}
 
-          <div className="card-right">
-            <GreenCheckmark />
-            <BsThreeDotsVertical />
-          </div>
-        </li>
-
-        <li className="wd-assignment-list-item list-group-item assignment-card p-4">
-          <BsGripVertical className="grip-icon" />
-
-          <div className="card-body d-inline ml-5">
-            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/2">
-              A2 - CSS
-            </Link>
-            <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
-          </div>
-
-          <div className="card-right">
-            <GreenCheckmark />
-            <BsThreeDotsVertical />
-          </div>
-        </li>
-
-        <li className="wd-assignment-list-item list-group-item assignment-card p-4">
-          <BsGripVertical className="grip-icon" />
-
-          <div className="card-body d-inline ml-5">
-            <Link className="wd-assignment-link " to="/Courses/1234/Assignments/3">
-              A3 -Bootstrap
-            </Link>
-            <p>Due Oct 3 at 11:59pm Oct 3 at 11:59pm | - /100 pts</p>
-          </div>
-
-          <div className="card-right">
-            <GreenCheckmark />
-            <BsThreeDotsVertical />
-          </div>
-        </li>
       </ul>
     </div>
   );

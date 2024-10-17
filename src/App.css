@@ -29,3 +29,7 @@ p{margin: 0;}
 .wd-lesson {
   border-left: 3px solid green !important;
 }
+
+.main-nav-link, .course-nav-link{
+  transition: all ease 0.3s;
+}
