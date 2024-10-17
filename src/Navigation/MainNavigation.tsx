@@ -12,7 +12,7 @@ export default function MainNavigation() {
   const { pathname } = useLocation();
   const links = [
     { label: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
-    { label: "Courses", path: "/Courses/1", icon: LiaBookSolid },
+    { label: "Courses", path: "/Dashboard", icon: LiaBookSolid },
     { label: "Calendar", path: "/Calendar", icon: IoCalendarOutline },
     { label: "Inbox", path: "/Inbox", icon: FaInbox },
   ];
