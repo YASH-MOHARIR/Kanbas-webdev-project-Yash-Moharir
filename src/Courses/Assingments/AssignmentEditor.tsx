@@ -1,12 +1,18 @@
 import React from "react";
+import { useParams } from "react-router";
+import { assignments } from "../../Database/database.tsx";
+import { Link } from "react-router-dom";
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+
+  var assingmentName = assignments.filter((assignment) => assignment._id == aid).map((assignment) => assignment.title);
   return (
     <div id="wd-assignments-editor">
       <label className="form-label" htmlFor="wd-name">
         Assignment Name
       </label>
-      <input className="form-control assignment-name" id="wd-name" defaultValue="A1 - ENV + HTML" />
+      <input className="form-control assignment-name" id="wd-name" defaultValue={assingmentName} />
 
       <p className="description-label">Description :</p>
       <textarea
@@ -151,8 +157,12 @@ export default function AssignmentEditor() {
       <hr />
 
       <div className="btns container">
-        <button className="btn btn-danger">Save</button>
-        <button className="btn btn-secondary">Cancel</button>
+        <Link to={`/Courses/${cid}/Assignments`}>
+          <button className="btn btn-danger">Save</button>
+        </Link>
+        <Link to={`/Courses/${cid}/Assignments`}>
+          <button className="btn btn-secondary">Cancel</button>
+        </Link>
       </div>
     </div>
   );
