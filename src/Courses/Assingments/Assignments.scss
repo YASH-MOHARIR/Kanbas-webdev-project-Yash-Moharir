@@ -27,7 +27,7 @@ input,
             font-size: 1.3em;
         }
     }
-}
+} 
 
 .assignment-heading {
     display: flex;
@@ -47,13 +47,15 @@ input,
             width: 100%;
             margin: 0;
             padding: 6px;
+            text-align: center;
             border: 1px solid gray;
             border-radius: 25px;
         }
         .icons{
             display: flex;
             justify-content: space-evenly;
-            width: 100%;
+            width: 100%; 
+            text-align: center;
             .assingment-icon { 
                 transform: scale(1.5);
             }
@@ -68,8 +70,11 @@ input,
         justify-content: space-between;
         align-items: center;
         border-left: 10px green solid;
-        .grip-icon{
+        .grip-icon, .document-editor-icon{
             transform: scale(2);
+        }
+        .document-editor-icon{
+            color: green;
         }
         .card-body{
             margin-left: 20px;
@@ -107,19 +112,15 @@ input,
     .assing-label{
         margin-top: 0;
     }
-    table{
-        td{
-            padding: 10px;
-        }
-        .checkboxes{
-            width: 100%;
-        }
-        .form-check-label{
-            padding: 0;
-            margin: 0;
-        }       
+  
+    .checkboxes{
+        width: 100%;
     }
-
+    .form-check-label{
+        padding: 0 ;
+        margin: 0 ;
+    }       
+ 
     hr{
         width: 100%;
     }
@@ -131,3 +132,5 @@ input,
         }
     }
 }
+
+ 
