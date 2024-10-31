@@ -86,7 +86,7 @@ export default function Assignments() {
                   to={`/Courses/${cid}/Assignments/${assignment._id}/${isFaculty ? "" : "Details"}`}>
                   {assignment.title}
                 </Link>
-                <p>Due {assignment.dueDate} Oct 3 at 11:59pm | - /100 pts</p>
+                <p>Due {assignment.dueDate} | - /100 pts</p>
               </div>
 
               <div className="card-right">

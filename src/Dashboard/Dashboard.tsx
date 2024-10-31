@@ -26,9 +26,11 @@ export default function Dashboard({
 
   const [showEnrolledCourses, setshowEnrolledCourses] = useState(true);
   const dispatch = useDispatch();
- 
-  var isEnrolled;
-console.log(currentUser._id);
+  var isEnrolled; 
+  
+  const enrolledCoursesCount = enrollments.filter(
+    (enrollment) => enrollment.user === currentUser._id
+  ).length;
 
   return (
     <div id="wd-dashboard">
@@ -59,7 +61,7 @@ console.log(currentUser._id);
       )}
       <div className="d-flex justify-content-between">
         <h2 id="wd-dashboard-published">
-          {isFaculty ? "Published Courses" : "Enrolled Courses"} ({courses.length})
+          {isFaculty ? "Published Courses" : `Enrolled Courses  `} ({enrolledCoursesCount})
         </h2>
 
         <button onClick={() => setshowEnrolledCourses(!showEnrolledCourses)} className="btn btn-outline-info">
@@ -123,7 +125,7 @@ console.log(currentUser._id);
           ) : (
             // LIST OF COURSES
             <div className="row">
-              <h1>List of all courses</h1>
+              <h1>List of all courses ({courses.length})</h1>
               {courses.map((course) => (
                 <div className="wd-dashboard-course col-md-3 mt-4">
                   <div className="card rounded-3 overflow-hidden">
