@@ -26,11 +26,9 @@ export default function Dashboard({
 
   const [showEnrolledCourses, setshowEnrolledCourses] = useState(true);
   const dispatch = useDispatch();
-  var isEnrolled; 
-  
-  const enrolledCoursesCount = enrollments.filter(
-    (enrollment) => enrollment.user === currentUser._id
-  ).length;
+  var isEnrolled;
+
+  const enrolledCoursesCount = enrollments.filter((enrollment) => enrollment.user === currentUser._id).length;
 
   return (
     <div id="wd-dashboard">
@@ -144,30 +142,26 @@ export default function Dashboard({
                         ))
                       }
                       {/* showing enroll buttons only to students */}
-                      {!isFaculty ? (
-                        isEnrolled ? (
-                          <button
-                            onClick={() => dispatch(deleteEnrollment({ user: currentUser._id, course: course._id }))}
-                            className="btn btn-outline-success">
-                            Un-enroll
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() =>
-                              dispatch(
-                                addEnrollment({
-                                  _id: enrollments.length + 1,
-                                  user: currentUser._id,
-                                  course: course._id,
-                                })
-                              )
-                            }
-                            className="btn btn-outline-success">
-                            Enroll
-                          </button>
-                        )
+                      {isEnrolled ? (
+                        <button
+                          onClick={() => dispatch(deleteEnrollment({ user: currentUser._id, course: course._id }))}
+                          className="btn btn-outline-success">
+                          Un-enroll
+                        </button>
                       ) : (
-                        ""
+                        <button
+                          onClick={() =>
+                            dispatch(
+                              addEnrollment({
+                                _id: enrollments.length + 1,
+                                user: currentUser._id,
+                                course: course._id,
+                              })
+                            )
+                          }
+                          className="btn btn-outline-success">
+                          Enroll
+                        </button>
                       )}
                     </div>
                     {/* </Link> */}
