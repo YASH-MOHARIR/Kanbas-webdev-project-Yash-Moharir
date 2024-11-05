@@ -8,7 +8,6 @@ import { MdEditDocument } from "react-icons/md";
 
 import GreenCheckmark from "../Modules/GreenCheckmark.tsx";
 import { Link, useParams } from "react-router-dom";
- 
 
 import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
@@ -35,18 +34,20 @@ export default function Assignments() {
             placeholder="Search..."
             aria-describedby="basic-addon1"></input>
         </div>
-        {isFaculty?
-        <div className="action-btns">
-          <button className="btn btn-outline-dark   mx-3" id="wd-add-assignment-group">
-            + Group
-          </button>
-          <Link to={`/Courses/${cid}/Assignments/new`}>
-            <button className="btn btn-danger mx-3" id="wd-add-assignment">
-              + Assignment
+        {isFaculty ? (
+          <div className="action-btns">
+            <button className="btn btn-outline-dark   mx-3" id="wd-add-assignment-group">
+              + Group
             </button>
-          </Link>
-        </div>
-        :""}
+            <Link to={`/Courses/${cid}/Assignments/new`}>
+              <button className="btn btn-danger mx-3" id="wd-add-assignment">
+                + Assignment
+              </button>
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="assignment-heading mt-3 p-3 bg-secondary">
@@ -59,11 +60,13 @@ export default function Assignments() {
         <div className="heading-controls">
           <p>40% of Total</p>
           <div className="icons">
-            {isFaculty?
-            <Link to={`/Courses/${cid}/Assignments/new`}>
-              <LiaPlusSolid className="assingment-icon " />
-            </Link>
-            :""}
+            {isFaculty ? (
+              <Link to={`/Courses/${cid}/Assignments/new`}>
+                <LiaPlusSolid className="assingment-icon " />
+              </Link>
+            ) : (
+              ""
+            )}
             <BsThreeDotsVertical className="assingment-icon" />
           </div>
         </div>
@@ -90,15 +93,48 @@ export default function Assignments() {
               </div>
 
               <div className="card-right">
-                {isFaculty?
-                <button className="btn btn-danger mx-2">
-                  <FaTrash onClick={() => dispatch(deleteAssignment(assignment._id))} />
-                </button>
-                :""}
+                {isFaculty ? (
+                  <button
+                    className="btn btn-danger mx-2"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <FaTrash />
+                  </button>
+                ) : (
+                  ""
+                )}
+
+
 
                 <GreenCheckmark />
                 <BsThreeDotsVertical />
               </div>
+              <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">
+                          Are you sure you want to delete?
+                        </h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+ 
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => dispatch(deleteAssignment(assignment._id))}
+                          type="button"
+                          className="btn btn-danger"
+                          data-bs-dismiss="modal">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </li>
           ))}
       </ul>
