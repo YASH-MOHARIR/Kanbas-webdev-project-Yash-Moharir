@@ -31,7 +31,11 @@ function App() {
     setCourses([...courses, { ...course, _id: new Date().getTime().toString() }]);
   };
   const deleteCourse = (courseId: any) => {
+    // eslint-disable-next-line no-restricted-globals
+    const userResponse = confirm("Are you sure you want to delete?");
+    if (userResponse) {
     setCourses(courses.filter((course) => course._id !== courseId));
+    }
   };
   const updateCourse = () => {
     setCourses(
