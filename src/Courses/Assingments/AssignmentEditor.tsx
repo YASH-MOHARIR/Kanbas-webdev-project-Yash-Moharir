@@ -10,11 +10,18 @@ export default function AssignmentEditor() {
   var dispatch = useDispatch();
   
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-  var currAssignment = assignments.filter((assignment) => assignment._id == aid).map((assignment) => assignment)[0];
+  var currAssignment = assignments.filter((assignment) => assignment._id == aid).map((assignment) => assignment)[0]|| {
+    _id: aid,
+    title: "",
+    description: "",
+    points: 0,
+    submissionType: { mode: "", options: [] }, // Set default structure
+    availableFrom: "",
+    availableUntil: ""
+  };
    
   console.log(currAssignment);
-  const [thisAssignment, setThisAssignment] = useState(currAssignment);
-
+  const [thisAssignment, setThisAssignment] = useState(currAssignment); 
   return (
     <div id="wd-assignments-editor">
       <h1>Edit Assignment</h1>
@@ -69,7 +76,7 @@ export default function AssignmentEditor() {
         </div>
         <div className="col-8">
           <div className="form-control">
-            <select className="form-select" name="" id="" defaultValue={currAssignment.submissionType.mode}>
+            <select className="form-select" name="" id="" >
               <option value="Online">Online</option>
               <option value="In Person">In Person</option>
             </select>

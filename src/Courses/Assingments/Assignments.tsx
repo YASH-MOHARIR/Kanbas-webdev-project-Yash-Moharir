@@ -18,8 +18,10 @@ export default function Assignments() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
 
+
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+ 
   const dispatch = useDispatch();
   return (
     <div id="wd-assignments">
@@ -79,6 +81,7 @@ export default function Assignments() {
           )
           .map((assignment: any) => (
             <li className="wd-assignment-list-item list-group-item assignment-card p-4">
+              
               <BsGripVertical className="grip-icon" />
 
               <MdEditDocument className="document-editor-icon mx-3" />
@@ -89,16 +92,20 @@ export default function Assignments() {
                   to={`/Courses/${cid}/Assignments/${assignment._id}/${isFaculty ? "" : "Details"}`}>
                   {assignment.title}
                 </Link>
-                <p>Due {assignment.dueDate} | - /100 pts</p>
+                <p>Not Available Until :{assignment.availableFrom} | Due {assignment.dueDate} | - /{assignment.points}pts</p>
+ 
               </div>
 
               <div className="card-right">
+                
                 {isFaculty ? (
                   <button
                     className="btn btn-danger mx-2"
                     type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#exampleModal"
+                    onClick={() => dispatch(deleteAssignment(assignment._id))}
+                    >
                     <FaTrash />
                   </button>
                 ) : (
@@ -110,7 +117,7 @@ export default function Assignments() {
                 <GreenCheckmark />
                 <BsThreeDotsVertical />
               </div>
-              <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              {/* <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -125,7 +132,7 @@ export default function Assignments() {
                           Cancel
                         </button>
                         <button
-                          onClick={() => dispatch(deleteAssignment(assignment._id))}
+                          // onClick={() => dispatch(deleteAssignment(assignment._id))}
                           type="button"
                           className="btn btn-danger"
                           data-bs-dismiss="modal">
@@ -134,7 +141,7 @@ export default function Assignments() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
             </li>
           ))}
       </ul>

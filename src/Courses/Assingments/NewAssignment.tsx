@@ -6,15 +6,16 @@ import { Link } from "react-router-dom";
 export default function NewAssignment({addAssignment}) {
   //name, description, points, due date, available from date, and available until date.
   const { cid   } = useParams();
+  const id = `A${Math.floor(Math.random() * 101)}`;
   const inputData = 
   {
-    "_id": "A101",
+    "_id": id,
     "title": "Propulsion Assignment",
     "course": cid,
     "module": "Module 1",
     "availableDate": "2024-10-20T00:00",
     "dueDate": "2024-10-30T23:59",
-    "link": "#/Kanbas/Courses/RS101/Assignments/A101",
+    "link": `/Courses/RS101/Assignments/${id}`,
     "description": "This assignment is about propulsion systems in aerospace engineering.",
     "points": 100,
     "assignmentGroup": "Assignments",
@@ -54,7 +55,7 @@ const dispatch = useDispatch();
           <label htmlFor="wd-points">Points</label>
         </div>
         <div className="col-8">
-          <input className="form-control" id="wd-points"   />
+          <input type="number" className="form-control" id="wd-points"   onChange={(e)=>setinputData({...inputDataState,"points" : Number(e.target.value)})} />
         </div>
       </div>
 
@@ -161,6 +162,8 @@ const dispatch = useDispatch();
               type="date"
               name=""
               id="" 
+              
+              onChange={(e)=>setinputData({...inputDataState,"dueDate" : e.target.value})}
             />
 
             <div className="row">
@@ -174,7 +177,7 @@ const dispatch = useDispatch();
                   type="date"
                   name=""
                   id=""
-
+                  onChange={(e)=>setinputData({...inputDataState,"availableFrom" : e.target.value})}
                 />
               </div>
               <div className="col">
@@ -187,7 +190,7 @@ const dispatch = useDispatch();
                   type="date"
                   name=""
                   id=""
- 
+                  onChange={(e)=>setinputData({...inputDataState,"availableUntil" : e.target.value})}
                 />
               </div>
             </div>

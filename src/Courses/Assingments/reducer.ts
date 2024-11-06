@@ -15,8 +15,11 @@ const assignmentsSlice = createSlice({
         title: assignment.title,
         description : assignment.description,
         _id: assignment._id, 
-        course: assignment.course
- 
+        course: assignment.course,
+        points:assignment.points,
+        dueDate:assignment.dueDate,
+        availableFrom:  assignment.availableFrom,
+        availableUntil: assignment.availableUntil
       };
       state.assignments = [...state.assignments, newAssignment] as any;
       console.log(newAssignment);
@@ -25,8 +28,14 @@ const assignmentsSlice = createSlice({
 
 
     deleteAssignment: (state, { payload: assignmentID }) => {
-      state.assignments = state.assignments.filter(
-        (a: any) => a._id !== assignmentID);
+      // eslint-disable-next-line no-restricted-globals
+      const userResponse = confirm("Are you sure you want to delete?");
+ 
+      if (userResponse) {
+        state.assignments = state.assignments.filter(
+          (a: any) => a._id !== assignmentID);
+      } 
+
     },
     
     updateAssignment: (state, { payload: assignment }) => {
