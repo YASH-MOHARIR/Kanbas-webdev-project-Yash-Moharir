@@ -102,9 +102,8 @@ export default function Assignments() {
                   <button
                     className="btn btn-danger mx-2"
                     type="button"
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#exampleModal"
-                    onClick={() => dispatch(deleteAssignment(assignment._id))}
+                    data-bs-toggle="modal"
+                    data-bs-target={`#${assignment._id}`} 
                     >
                     <FaTrash />
                   </button>
@@ -117,7 +116,7 @@ export default function Assignments() {
                 <GreenCheckmark />
                 <BsThreeDotsVertical />
               </div>
-              {/* <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal fade" id={assignment._id}  >
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -132,7 +131,7 @@ export default function Assignments() {
                           Cancel
                         </button>
                         <button
-                          // onClick={() => dispatch(deleteAssignment(assignment._id))}
+                          onClick={() => dispatch(deleteAssignment(assignment._id))}
                           type="button"
                           className="btn btn-danger"
                           data-bs-dismiss="modal">
@@ -141,7 +140,7 @@ export default function Assignments() {
                       </div>
                     </div>
                   </div>
-                </div> */}
+                </div>
             </li>
           ))}
       </ul>

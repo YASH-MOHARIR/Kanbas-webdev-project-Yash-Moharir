@@ -16,7 +16,6 @@ import store from "./store/store.ts";
 
 import { Provider } from "react-redux";
 import ProtectedRoute from "./Account/ProtectedRoute.tsx";
-import ProtectedCourse from "./Account/ProtecectedCourse.tsx";
 function App() {
   const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
@@ -31,11 +30,7 @@ function App() {
     setCourses([...courses, { ...course, _id: new Date().getTime().toString() }]);
   };
   const deleteCourse = (courseId: any) => {
-    // eslint-disable-next-line no-restricted-globals
-    const userResponse = confirm("Are you sure you want to delete?");
-    if (userResponse) {
     setCourses(courses.filter((course) => course._id !== courseId));
-    }
   };
   const updateCourse = () => {
     setCourses(
