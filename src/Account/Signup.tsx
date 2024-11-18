@@ -13,8 +13,8 @@ export default function Signup() {
     
     try{
       const currentUser = await client.signup(user); 
-      dispatch(setCurrentUser(currentUser));
-      navigate("/Account/Profile");
+      if(currentUser) alert("Sign Up Succesfull. Please Sign in to continue");
+      navigate("/Account/signin");
     }catch (error: any) {
       alert(error.response.data.message);
     }
@@ -30,8 +30,7 @@ export default function Signup() {
              className="wd-password form-control mb-2" placeholder="password" />
       <button type="submit" onClick={signup} className="wd-signup-btn btn btn-primary mb-2 w-100"> Sign up </button><br />
  
-
-      <Link to="/Account/Signin" className="wd-signin-link">Sign in</Link>
+ 
  
     </div>
 );}

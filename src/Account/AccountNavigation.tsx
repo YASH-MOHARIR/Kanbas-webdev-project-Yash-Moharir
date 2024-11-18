@@ -14,7 +14,7 @@ export default function AccountNavigation() {
   const { pathname } = useLocation();
 
   return (
-    <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">
+    <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0"> 
       {links.map((aLink) => (
         <Link
           key={aLink.path}
