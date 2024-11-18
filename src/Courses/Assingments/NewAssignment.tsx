@@ -1,58 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom"; 
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router"; 
+import { Link } from "react-router-dom";
 
 import * as assignmentsClient from "./client.ts";
 
-export default function AssignmentEditor() {
+export default function NewAssignment({addAssignment}) {
+  //name, description, points, due date, available from date, and available until date.
+  const { cid   } = useParams();
   const navigate=  useNavigate();
-  const { cid, aid } = useParams(); 
-  const [currAssignment, setCurAssignmet] = useState({
-    _id: aid,
-    title: "",
-    description: "",
-    points: 0,
-    submissionType: { mode: "", options: [] }, // Set default structure
-    availableFrom: "",
-    availableUntil: "",
-    assignedTo: "",
-    dueDate: "",
-  });
-
-  const [updatedAssignment, setUpdatedAssignment] = useState(currAssignment);
-
-  const fetchThisAssignment = async (courseID, assignmentID) => {
-    const assignment = await assignmentsClient.fetchAssignmentByID(courseID, assignmentID);
-    setCurAssignmet(assignment);
-  };
-
-  const updateAssignment = async (updatedAssignment) =>{
-    await assignmentsClient.updateAssignment(updatedAssignment);
-    navigate(`/Courses/${cid}/Assignments`);  
-    
-  } 
-
+  const id = `A${Math.floor(Math.random() * 101)}`;
+  const inputData = 
+  {
+    "_id": id,
+    "title": "Propulsion Assignment",
+    "course": cid,
+    "module": "Module 1",
+    "availableDate": "2024-10-20T00:00",
+    "dueDate": "2024-10-30T23:59",
+    "link": `/Courses/RS101/Assignments/${id}`,
+    "description": "This assignment is about propulsion systems in aerospace engineering.",
+    "points": 100,
+    "assignmentGroup": "Assignments",
+    "showGradesAs": "Percentage",
+    "submissionType": {
+      "mode": "Online",
+      "options": ["Text Entry", "Website URL", "Media Recordings"]
+    },
+    "assignedTo": "Everyone",
+    "availableFrom": "2024-10-20T00:00",
+    "availableUntil": "2024-10-30T23:59"
+  }
+ 
+const createAssignment = async(NewAssignment)=>{
+  await assignmentsClient.createAssignment(NewAssignment)
+  navigate(`/Courses/${cid}/Assignments`);  
+}
   
-  useEffect(() => {
-    fetchThisAssignment(cid, aid);
-  }, [cid]);
-
-  useEffect(() => {
-    setUpdatedAssignment(currAssignment);
-  }, [currAssignment]);
+const dispatch = useDispatch();
+  const [inputDataState , setinputData] = useState(inputData);
 
   return (
     <div id="wd-assignments-editor">
-      <h1>Edit Assignment</h1>
       <label className="form-label" htmlFor="wd-name">
         Assignment Name
       </label>
-      <input
-        onChange={(e) => setUpdatedAssignment({ ...updatedAssignment, title: e.target.value })}
-        className="form-control assignment-name"
-        id="wd-name"
-        defaultValue={currAssignment.title}
-      />
+      <input className="form-control assignment-name" id="wd-name" onChange={(e)=>setinputData({...inputDataState,"title" : e.target.value})}   />
 
       <p className="description-label">Description :</p>
       <textarea
@@ -60,20 +53,15 @@ export default function AssignmentEditor() {
         cols={10}
         rows={5}
         id="wd-description"
-        defaultValue={currAssignment.description}
-        onChange={(e) => setUpdatedAssignment({ ...updatedAssignment, description: e.target.value })}></textarea>
+        onChange={(e)=>setinputData({...inputDataState,"description" : e.target.value})}
+   ></textarea>
 
       <div className="row mt-4">
         <div className="col">
           <label htmlFor="wd-points">Points</label>
         </div>
         <div className="col-8">
-          <input
-            className="form-control"
-            id="wd-points"
-            defaultValue={currAssignment.points}
-            onChange={(e) => setUpdatedAssignment({ ...updatedAssignment, points: Number(e.target.value) })}
-          />
+          <input type="number" className="form-control" id="wd-points"   onChange={(e)=>setinputData({...inputDataState,"points" : Number(e.target.value)})} />
         </div>
       </div>
 
@@ -95,7 +83,7 @@ export default function AssignmentEditor() {
         </div>
         <div className="col-8">
           <div className="form-control">
-            <select className="form-select" name="" id="">
+            <select className="form-select" name="" id=""  >
               <option value="Online">Online</option>
               <option value="In Person">In Person</option>
             </select>
@@ -169,7 +157,7 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points assign-label">
               <b>Assign To:</b>{" "}
             </label>
-            <input className="form-control" type="text" defaultValue={currAssignment.assignedTo} />
+            <input className="form-control" type="text"   />
 
             <label htmlFor="wd-points">
               {" "}
@@ -179,9 +167,9 @@ export default function AssignmentEditor() {
               className="form-control"
               type="date"
               name=""
-              id=""
-              defaultValue={currAssignment.dueDate.split("T")[0]}
-              onChange={(e) => setUpdatedAssignment({ ...updatedAssignment, dueDate: e.target.value })}
+              id="" 
+              
+              onChange={(e)=>setinputData({...inputDataState,"dueDate" : e.target.value})}
             />
 
             <div className="row">
@@ -195,7 +183,7 @@ export default function AssignmentEditor() {
                   type="date"
                   name=""
                   id=""
-                  defaultValue={currAssignment.availableFrom.split("T")[0]}
+                  onChange={(e)=>setinputData({...inputDataState,"availableFrom" : e.target.value})}
                 />
               </div>
               <div className="col">
@@ -208,7 +196,7 @@ export default function AssignmentEditor() {
                   type="date"
                   name=""
                   id=""
-                  defaultValue={currAssignment.availableUntil.split("T")[0]}
+                  onChange={(e)=>setinputData({...inputDataState,"availableUntil" : e.target.value})}
                 />
               </div>
             </div>
@@ -219,17 +207,14 @@ export default function AssignmentEditor() {
       <hr />
 
       <div className="btns container">
-        {/* <Link to={`/Courses/${cid}/Assignments`}> */}
-          <button
-            onClick={() =>
-              //  dispatch(updateAssignment(thisAssignment ))
-              updateAssignment(updatedAssignment)
-            }
-            className="btn btn-danger">
-            Save
-          </button>
-        {/* </Link> */}
-
+ 
+        <button onClick={()=> 
+ 
+          createAssignment(inputDataState)
+          }   className="btn btn-danger">
+          Save
+        </button>
+ 
         <Link to={`/Courses/${cid}/Assignments`}>
           <button className="btn btn-secondary">Cancel</button>
         </Link>
