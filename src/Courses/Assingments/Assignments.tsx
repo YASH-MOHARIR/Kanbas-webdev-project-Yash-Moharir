@@ -52,11 +52,13 @@ const [assignments,setAssignments] = useState([  {
 
   const fetchAssignmentsInCourse = async(courseID) =>{
    const assignments = await assignmentsClient.fetchAssignmentsInCourse(courseID)
+   console.log(assignments);
+   
    setAssignments(assignments); 
   }
   
   const deleteAssignment = async(courseID,assignmentID) =>{
-   await assignmentsClient.deleteAssignmetn(courseID,assignmentID)
+   await assignmentsClient.deleteAssignment(courseID,assignmentID)
    fetchAssignmentsInCourse(cid); 
   }
 

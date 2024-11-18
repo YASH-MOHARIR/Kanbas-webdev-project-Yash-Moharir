@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router"; 
+import { useNavigate, useParams } from "react-router"; 
 import { Link } from "react-router-dom";
 
 import * as assignmentsClient from "./client.ts";
@@ -8,6 +8,7 @@ import * as assignmentsClient from "./client.ts";
 export default function NewAssignment({addAssignment}) {
   //name, description, points, due date, available from date, and available until date.
   const { cid   } = useParams();
+  const navigate=  useNavigate();
   const id = `A${Math.floor(Math.random() * 101)}`;
   const inputData = 
   {
@@ -32,7 +33,8 @@ export default function NewAssignment({addAssignment}) {
   }
  
 const createAssignment = async(NewAssignment)=>{
-  assignmentsClient.createAssignment(NewAssignment)
+  await assignmentsClient.createAssignment(NewAssignment)
+  navigate(`/Courses/${cid}/Assignments`);  
 }
   
 const dispatch = useDispatch();
@@ -205,14 +207,14 @@ const dispatch = useDispatch();
       <hr />
 
       <div className="btns container">
-      <Link to={`/Courses/${cid}/Assignments`}>
+ 
         <button onClick={()=> 
-          // dispatch(addAssignment(inputDataState))
+ 
           createAssignment(inputDataState)
           }   className="btn btn-danger">
           Save
         </button>
-        </Link>
+ 
         <Link to={`/Courses/${cid}/Assignments`}>
           <button className="btn btn-secondary">Cancel</button>
         </Link>

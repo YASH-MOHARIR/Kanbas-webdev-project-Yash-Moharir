@@ -11,7 +11,7 @@ export const fetchAssignmentByID = async (courseID, assignmentID) => {
   return data;
 };
 
-export const deleteAssignmetn = async (courseID, assignmentID) => {
+export const deleteAssignment = async (courseID, assignmentID) => {
   const { data } = await axios.delete(`${COURSES_API}/${courseID}/${assignmentID}`);
   return data;
 };

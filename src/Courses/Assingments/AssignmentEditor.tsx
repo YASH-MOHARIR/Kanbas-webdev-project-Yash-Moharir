@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom"; 
 
 import * as assignmentsClient from "./client.ts";
 
 export default function AssignmentEditor() {
+  const navigate=  useNavigate();
   const { cid, aid } = useParams(); 
   const [currAssignment, setCurAssignmet] = useState({
     _id: aid,
@@ -27,7 +28,11 @@ export default function AssignmentEditor() {
 
   const updateAssignment = async (updatedAssignment) =>{
     await assignmentsClient.updateAssignment(updatedAssignment);
-  }
+    navigate(`/Courses/${cid}/Assignments`);  
+    
+  } 
+
+  
   useEffect(() => {
     fetchThisAssignment(cid, aid);
   }, [cid]);
@@ -214,7 +219,7 @@ export default function AssignmentEditor() {
       <hr />
 
       <div className="btns container">
-        <Link to={`/Courses/${cid}/Assignments`}>
+        {/* <Link to={`/Courses/${cid}/Assignments`}> */}
           <button
             onClick={() =>
               //  dispatch(updateAssignment(thisAssignment ))
@@ -223,7 +228,7 @@ export default function AssignmentEditor() {
             className="btn btn-danger">
             Save
           </button>
-        </Link>
+        {/* </Link> */}
 
         <Link to={`/Courses/${cid}/Assignments`}>
           <button className="btn btn-secondary">Cancel</button>
