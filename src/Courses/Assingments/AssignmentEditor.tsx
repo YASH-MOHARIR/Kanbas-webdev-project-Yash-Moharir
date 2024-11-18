@@ -25,7 +25,7 @@ export default function AssignmentEditor() {
     setCurAssignmet(assignment);
   };
 
-  const updateAssignment = async (updatedAssignment) => assignmentsClient.updateAssignment(updatedAssignment);
+  const updateAssignment = async (updatedAssignment) =>await assignmentsClient.updateAssignment(updatedAssignment);
 
   useEffect(() => {
     fetchThisAssignment(cid, aid);
