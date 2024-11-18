@@ -45,6 +45,7 @@ input,
   width: 100%;
   margin: 0;
   padding: 6px;
+  text-align: center;
   border: 1px solid gray;
   border-radius: 25px;
 }
@@ -52,6 +53,7 @@ input,
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+  text-align: center;
 }
 .assignment-heading .heading-controls .icons .assingment-icon {
   transform: scale(1.5);
@@ -64,8 +66,11 @@ input,
   align-items: center;
   border-left: 10px green solid;
 }
-.assignment-cards .assignment-card .grip-icon {
+.assignment-cards .assignment-card .grip-icon, .assignment-cards .assignment-card .document-editor-icon {
   transform: scale(2);
+}
+.assignment-cards .assignment-card .document-editor-icon {
+  color: green;
 }
 .assignment-cards .assignment-card .card-body {
   margin-left: 20px;
@@ -96,13 +101,10 @@ input,
 #wd-assignments-editor .assing-label {
   margin-top: 0;
 }
-#wd-assignments-editor table td {
-  padding: 10px;
-}
-#wd-assignments-editor table .checkboxes {
+#wd-assignments-editor .checkboxes {
   width: 100%;
 }
-#wd-assignments-editor table .form-check-label {
+#wd-assignments-editor .form-check-label {
   padding: 0;
   margin: 0;
 }
