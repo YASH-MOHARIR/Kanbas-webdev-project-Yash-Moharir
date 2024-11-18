@@ -64,7 +64,7 @@ const [assignments,setAssignments] = useState([  {
   useEffect(() => {
     fetchAssignmentsInCourse(cid);
     fetchAllEnrollmetns();
-  },[currentUser]);
+  },[cid]);
  
 
   return (
