@@ -1,0 +1,120 @@
+input,
+.btn {
+  border-radius: 3px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+}
+.search .input-group {
+  height: 100%;
+  transform: scale(1.3);
+  transform-origin: 0 0;
+  display: flex;
+  align-items: center;
+}
+.search .input-group .search-icon {
+  padding: 9px;
+  border-right: none;
+  background-color: transparent;
+}
+.search .input-group .form-control {
+  border-left: none;
+}
+.search .action-btns .btn {
+  font-size: 1.3em;
+}
+
+.assignment-heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.assignment-heading h3 {
+  margin: 0;
+}
+.assignment-heading .heading-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+}
+.assignment-heading .heading-controls p {
+  width: 100%;
+  margin: 0;
+  padding: 6px;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 25px;
+}
+.assignment-heading .heading-controls .icons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  text-align: center;
+}
+.assignment-heading .heading-controls .icons .assingment-icon {
+  transform: scale(1.5);
+}
+
+.assignment-cards .assignment-card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 10px green solid;
+}
+.assignment-cards .assignment-card .grip-icon, .assignment-cards .assignment-card .document-editor-icon {
+  transform: scale(2);
+}
+.assignment-cards .assignment-card .document-editor-icon {
+  color: green;
+}
+.assignment-cards .assignment-card .card-body {
+  margin-left: 20px;
+  border-radius: 0px !important;
+}
+.assignment-cards .assignment-card .card-body .wd-assignment-link {
+  font-size: 1.4em;
+  color: black;
+  text-decoration: none;
+}
+.assignment-cards .assignment-card .card-body .wd-assignment-link:hover {
+  text-decoration: underline;
+}
+.assignment-cards .assignment-card .card-right {
+  transform: scale(1.5);
+}
+
+#wd-assignments-editor {
+  display: flex;
+  flex-direction: column;
+}
+#wd-assignments-editor label, #wd-assignments-editor .description-label {
+  font-size: 1.3em;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 0;
+}
+#wd-assignments-editor .assing-label {
+  margin-top: 0;
+}
+#wd-assignments-editor .checkboxes {
+  width: 100%;
+}
+#wd-assignments-editor .form-check-label {
+  padding: 0;
+  margin: 0;
+}
+#wd-assignments-editor hr {
+  width: 100%;
+}
+#wd-assignments-editor .btns {
+  width: 100%;
+}
+#wd-assignments-editor .btns .btn {
+  margin-left: 30px;
+  float: right;
+}/*# sourceMappingURL=Assignments.css.map */
