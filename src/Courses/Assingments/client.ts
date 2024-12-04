@@ -4,6 +4,8 @@ const COURSES_API = `${REMOTE_SERVER}/api/assignments`;
 
 export const fetchAssignmentsInCourse = async (courseID) => {
   const { data } = await axios.get(`${COURSES_API}/${courseID}`);
+  console.log("fetch data", data);
+  
   return data;
 };
 export const fetchAssignmentByID = async (courseID, assignmentID) => {

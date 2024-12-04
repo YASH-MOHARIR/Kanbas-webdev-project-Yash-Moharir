@@ -14,7 +14,7 @@ export default function AccountNavigation() {
   const { pathname } = useLocation();
 
   return (
-    <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0"> 
+    <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">
       {links.map((aLink) => (
         <Link
           key={aLink.path}
@@ -23,6 +23,14 @@ export default function AccountNavigation() {
           {aLink.label}
         </Link>
       ))}
+
+{currentUser && currentUser.role === "FACULTY" && (
+        <Link
+          to={`/Account/Users`}
+          className={`list-group-item  ${pathname.includes("Users") ? " active" : ""} border text-danger border-0 `}>
+          Users{" "}
+        </Link>
+      )}
     </div>
   );
 }

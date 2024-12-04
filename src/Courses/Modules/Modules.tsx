@@ -24,6 +24,7 @@ export default function Modules() {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };
     const module = await coursesClient.createModuleForCourse(cid, newModule);
+    fetchModules();
     dispatch(addModule(module));
   };
 

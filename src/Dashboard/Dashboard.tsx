@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import {  useSelector } from "react-redux";
-
-import * as enrollmemtsClient from "./client.ts";
+import { useSelector } from "react-redux";
 
 export default function Dashboard({
   courses,
@@ -13,7 +11,11 @@ export default function Dashboard({
   addNewCourse,
   deleteCourse,
   updateCourse,
-  fetchUserCourses, 
+  enrolling,
+  setEnrolling,
+  // updateEnrollment,
+  enrollUserInCourse,
+  unEnrollFromCourse
 }: {
   courses: any[];
   course: any;
@@ -22,37 +24,33 @@ export default function Dashboard({
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
-  fetchUserCourses: () => void; 
+  enrolling: boolean;
+  setEnrolling: (enrolling: boolean) => void;
+  // updateEnrollment: (courseId: string, enrolled: boolean) => void;
+  enrollUserInCourse: (courseId: string) => void;
+  unEnrollFromCourse: (courseId: string) => void;
 }) {
+
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role === "FACULTY";
-
   const [showEnrolledCourses, setshowEnrolledCourses] = useState(true);
-
-  const enrollUserInCourse = async (userId, courseId) => {
-    const newEnrollment = await enrollmemtsClient.enrollUserInCourse(userId, courseId);
-    console.log(newEnrollment.data);
-    fetchUserCourses(); 
-  };
-
-  const unEnrollFromCourse = async (courseInfo) => {
-    await enrollmemtsClient.unEnrollFromCourse(courseInfo.user, courseInfo.course);
-    fetchUserCourses();
-  };
-
   // Helper Method to assign enroll button 
-  var isEnrolled = (courseId: string) => {
+  var isEnrolled = (courseId: any) => {    
     return userCourses.find((userCourse) => userCourse._id === courseId);
   };
 
-  useEffect(() => {
-    fetchUserCourses();
-  }, [currentUser]);
- 
-  
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <h1 id="wd-dashboard-title">
+        Dashboard
+        <button onClick={() => setshowEnrolledCourses(!showEnrolledCourses)} className="float-end btn btn-primary">
+ 
+          {showEnrolledCourses ?   "See All Courses" : "See Enrolled Courses" }
+        </button>
+      </h1>
+
+      <hr />
+
       {isFaculty && (
         <div className="course-editor">
           <h4 className="my-auto">
@@ -81,10 +79,7 @@ export default function Dashboard({
         <h2 id="wd-dashboard-published">
           {isFaculty ? "Published Courses" : `Enrolled Courses  `} ({userCourses.length})
         </h2>
-
-        <button onClick={() => setshowEnrolledCourses(!showEnrolledCourses)} className="btn btn-outline-info">
-          {showEnrolledCourses ? "See All Courses" : "See Enrolled Courses"}
-        </button>
+ 
       </div>
       <hr />
       <div id="wd-dashboard-courses" className="row">
@@ -105,7 +100,7 @@ export default function Dashboard({
                         className="wd-dashboard-course-link text-decoration-none text-dark">
                         <button className="btn btn-primary"> Go </button>
                       </Link>
-
+                      {/* Course Update / Add form for Faculty  */}
                       {isFaculty && (
                         <div className="action-btns">
                           <button
@@ -130,6 +125,7 @@ export default function Dashboard({
                     </div>
                   </div>
                 </div>
+                {/* Delete Modal  */}
                 <div className="modal fade" id={course._id}>
                   <div className="modal-dialog">
                     <div className="modal-content">
@@ -165,7 +161,7 @@ export default function Dashboard({
             <div className="row">
               <h1>List of all courses ({courses.length})</h1>
               {courses.map((course) => (
-                <div className="wd-dashboard-course col-md-3 mt-4">
+                <div className="wd-dashboard-course col-md-3 mt-4" key={course._id}>
                   <div className="card rounded-3 overflow-hidden">
                     <img src="/images/reactjs.webp" width="100%" height={160} />
                     <div className="card-body">
@@ -173,12 +169,24 @@ export default function Dashboard({
                       <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
                         {course.description}
                       </p>
- 
+
+
+                      {/* {!enrolling && (
+                        <button
+                          onClick={(event) => {
+                            event.preventDefault();
+                            updateEnrollment(course._id, !course.enrolled);
+                          }}
+                          className={`btn ${isEnrolled(course._id)? "btn-danger" : "btn-outline-success"} `}>
+                          {isEnrolled(course._id) ? "Unenroll" : "Enroll"}
+                        </button>
+                      )} */}
+
                       {/* showing enroll buttons only to students */}
                       {isEnrolled(course._id) ? (
                         <button
                           onClick={
-                            () => unEnrollFromCourse({ user: currentUser._id, course: course._id }) 
+                            () => unEnrollFromCourse(course._id ) 
                           }
                           className="btn btn-danger">
                           Un-enroll
@@ -186,12 +194,13 @@ export default function Dashboard({
                       ) : (
                         <button
                           onClick={
-                            () => enrollUserInCourse(currentUser._id, course._id)
+                            () => enrollUserInCourse(course._id)
                           }
                           className="btn btn-outline-success">
                           Enroll
                         </button>
                       )}
+
                     </div>
                   </div>
                 </div>

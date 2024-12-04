@@ -10,7 +10,7 @@ import Courses from "./Courses/Courses.tsx";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import React, { useEffect, useState } from "react";
- 
+
 import ProtectedRoute from "./Account/ProtectedRoute.tsx";
 import Session from "./Account/Session.tsx";
 
@@ -19,9 +19,9 @@ import * as courseClient from "./Courses/client.ts";
 import { useSelector } from "react-redux";
 
 function App() {
+
   const [courses, setCourses] = useState<any[]>([]);
   const [userCourses, setUserCourses] = useState<any[]>([]);
-
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const [course, setCourse] = useState<any>({
@@ -33,44 +33,17 @@ function App() {
     description: "New Description",
   });
 
-  const fetchAllCourses = async () => {
-    let courses = [];
-    try {
-      courses = await courseClient.fetchAllCourses();
-    } catch (error) {
-      console.error(error);
-    }
-    setCourses(courses);
-    // console.log("all Courses", courses);
-    
-  };
-
-  const fetchUserCourses = async () => {
-    let uCourses = [];
-    try {
-      uCourses = await userClient.findMyCourses();
-    } catch (error) {
-      
-      console.error(error);
-    }
-    
-    await setUserCourses(uCourses);
-    // console.log("FetchedUser Courses", uCourses);
-    // console.log("User Courses", userCourses);
-
-  };
-
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
+    const newCourse = await courseClient.createCourse(course);
     setCourses([...courses, newCourse]);
-    fetchUserCourses();
+    setUserCourses([...courses, newCourse]);
   };
 
   const deleteCourse = async (courseId: string) => {
     const status = await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
-
-    fetchUserCourses();
+    setCourses(courses.filter((course) => course._id !== courseId));
+    setUserCourses(courses.filter((course) => course._id !== courseId));
   };
 
   const updateCourse = async () => {
@@ -84,21 +57,69 @@ function App() {
         }
       })
     );
-    fetchUserCourses();
+    findCoursesForUser();
   };
 
-  // useEffect(() => {
-  //   console.log("App userCourses updated:", userCourses);
-  // }, [userCourses]);
+  // USER COURSES
+  const findCoursesForUser = async () => {
+    try {
+      const courses = await userClient.findCoursesForUser(currentUser._id);
+      setUserCourses(courses);
+    } catch (error) {
+      console.error("ERROR USER COURSES", error);
+    }
+  };
 
-  
+  //ALL COURSES
+  const fetchCourses = async () => {
+    try {
+      const courses = await courseClient.fetchAllCourses();
+      setCourses(courses);
+    } catch (error) {
+      console.error("ERROR ALL COURSES ", error);
+    }
+  };
+
+  // enrollments - finding user courses
+  const [enrolling, setEnrolling] = useState<boolean>(false);
+
+  // ENROLL - UNENROLL
+
+  const enrollUserInCourse = async (courseId: string) => {
+    await userClient.enrollIntoCourse(currentUser._id, courseId);
+    
+    fetchCourses();
+    findCoursesForUser();
+    
+  }
+  const unEnrollFromCourse = async (courseId: string) => { 
+    await userClient.unenrollFromCourse(currentUser._id, courseId);
+    
+    fetchCourses();
+    findCoursesForUser();
+  }
+
+  // const updateEnrollment = async (courseId: string, enrolled: boolean) => {
+  //   if (enrolled) {
+  //     await userClient.enrollIntoCourse(currentUser._id, courseId);
+  //   } else {
+  //     await userClient.unenrollFromCourse(currentUser._id, courseId);
+  //   }
+  //   setCourses(
+  //     courses.map((course) => {
+  //       if (course._id === courseId) {
+  //         return { ...course, enrolled: enrolled };
+  //       } else {
+  //         return course;
+  //       }
+  //     })
+  //   );
+  // };
+
   useEffect(() => {
-    fetchUserCourses();
+      fetchCourses();
+      findCoursesForUser();
   }, [currentUser]);
-
-  useEffect(() => {
-    fetchAllCourses(); 
-  }, []);
 
   return (
     <Session>
@@ -121,7 +142,12 @@ function App() {
                       addNewCourse={addNewCourse}
                       deleteCourse={deleteCourse}
                       updateCourse={updateCourse}
-                      fetchUserCourses={fetchUserCourses} 
+                      // fetchUserCourses={fetchUserCourses}
+                      enrolling={enrolling}
+                      setEnrolling={setEnrolling}
+                      // updateEnrollment={updateEnrollment}
+                      enrollUserInCourse={enrollUserInCourse}
+                      unEnrollFromCourse={unEnrollFromCourse}
                     />
                   </ProtectedRoute>
                 }
@@ -159,3 +185,5 @@ function App() {
 }
 
 export default App;
+
+// mongodb+srv://yashmoharir:<db_password>@kanbas.5h7gv.mongodb.net/?retryWrites=true&w=majority&appName=Kanbas
