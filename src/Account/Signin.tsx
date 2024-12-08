@@ -11,6 +11,8 @@ export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+
   const signin = async () => {
     try{
 
@@ -42,13 +44,9 @@ export default function Signin() {
         id="wd-password"
       />
       <button onClick={signin} id="wd-signin-btn" className="btn btn-primary w-100">
-        {" "}
-        Sign in{" "}
+        Sign in
       </button>
-      <Link id="wd-signup-link" to="/Account/Signup">
-        {" "}
-        Sign up{" "}
-      </Link>
+ 
     </div>
   );
 }

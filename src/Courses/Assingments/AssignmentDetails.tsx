@@ -45,7 +45,7 @@ export default function AssignmentDetails() {
       <h1>Assignment Details:</h1>
       <h3>{currAssingment.title}</h3>
       <h6>Due : {currAssingment.dueDate} | Points : {currAssingment.points}</h6>
-      <h6>Available From : {currAssingment.availableFrom} | Available Until : {currAssingment.availableUntil}</h6>
+      <h6>Available From : {currAssingment.availableFrom.split("T")[0]} | Available Until : {currAssingment.availableUntil.split("T")[0]}</h6>
       <p>{currAssingment.description}</p>
     </div>
   );

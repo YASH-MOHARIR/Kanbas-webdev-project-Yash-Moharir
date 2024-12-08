@@ -12,7 +12,7 @@ export default function CoursesNavigation() {
     { label: "Piazza", path: `/Courses/${cid}/Piazza` },
     { label: "Zoom", path: `/Courses/${cid}/Zoom` },
     { label: "Assignments", path: `/Courses/${cid}/Assignments` }, 
-    { label: "Quizzes", path: `/Courses/${cid}/Quizzes` },
+    { label: "Quizes", path: `/Courses/${cid}/Quizes` },
     { label: "Grades", path: `/Courses/${cid}/Grades` },
     { label: "People", path: `/Courses/${cid}/People` },
   ]; 

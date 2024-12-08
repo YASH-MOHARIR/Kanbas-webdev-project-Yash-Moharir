@@ -23,6 +23,14 @@ export default function AccountNavigation() {
           {aLink.label}
         </Link>
       ))}
+
+{currentUser && currentUser.role === "FACULTY" && (
+        <Link
+          to={`/Account/Users`}
+          className={`list-group-item  ${pathname.includes("Users") ? " active" : ""} border text-danger border-0 `}>
+          Users{" "}
+        </Link>
+      )}
     </div>
   );
 }

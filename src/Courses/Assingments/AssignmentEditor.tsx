@@ -219,16 +219,13 @@ export default function AssignmentEditor() {
       <hr />
 
       <div className="btns container">
-        {/* <Link to={`/Courses/${cid}/Assignments`}> */}
           <button
             onClick={() =>
-              //  dispatch(updateAssignment(thisAssignment ))
               updateAssignment(updatedAssignment)
             }
             className="btn btn-danger">
             Save
           </button>
-        {/* </Link> */}
 
         <Link to={`/Courses/${cid}/Assignments`}>
           <button className="btn btn-secondary">Cancel</button>
